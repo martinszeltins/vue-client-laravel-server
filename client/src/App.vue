@@ -11,14 +11,21 @@
         {
             async fetchData()
             {
-                await axios.get('http://localhost:8000/sanctum/csrf-cookie')
-
-                await axios.post('http://localhost:8000/login', {
+                // Login
+                let result = await axios.post('http://localhost:8000/login', {
                     email: 'martins@martins.lv',
-                    password: '12345678',
+                    password: '123456',
                 })
+                console.log(result.data)
 
-                const result = await axios.post('http://localhost:8000/api/user')
+                // Get user data
+                let options = {
+                    headers: {
+                        authorization: 'Bearer ' + result.data.access_token
+                    }
+                }
+
+                result = await axios.get('http://localhost:8000/user', options)
                 console.log(result.data)
             },
         },
