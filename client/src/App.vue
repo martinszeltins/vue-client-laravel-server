@@ -1,5 +1,7 @@
 <template>
-    My app
+    {{ title }}
+
+    <button @click="changeTitle">Change title</button>
 </template>
 
 <script>
@@ -7,8 +9,20 @@
     axios.defaults.withCredentials = true
 
     export default {
+        data()
+        {
+            return {
+                title: 'My app'
+            }
+        },
+
         methods:
         {
+            changeTitle()
+            {
+                this.title='My brand new app'
+            },
+
             async fetchData()
             {
                 // Login
